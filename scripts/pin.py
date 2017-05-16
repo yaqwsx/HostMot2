@@ -62,5 +62,5 @@ with open(p("scr"), "wt") as f:
     print >>f, "run all\nexit"
 
 os.chdir(d)
-run("fuse", "-prj", "prj", "-o", "main", "pinmaker_%s" % pinvhdl)
+run("fuse", "-mt", "off", "-v", "1", "-prj", "prj", "-o", "main", "pinmaker_%s" % pinvhdl)
 run("./main", "-tclbatch", "scr")

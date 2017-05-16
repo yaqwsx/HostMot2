@@ -77,13 +77,16 @@ clean:
 # No whitespace is acceptable in args to FIRMWARE_template
 define FIRMWARE_template
 $(1).BIT: $(TOP_$(2)) src/PIN_$(3).vhd $(COMMON_VHDL) scripts/build.py scripts/cards.py
+	@echo "\t\tCompiling BIT"
 	@mkdir -p $(dir $(1))
 	scripts/build.py $(2) $(3) $(1).BIT
 $(1).PIN: src/PIN_$(3).vhd src/IDROMConst.vhd src/pinmaker.vhd.in src/idrom_tools.vhd scripts/pin.py
+	@echo "\t\tCompiling PIN"
 	@mkdir -p $(dir $(1))
 	scripts/pin.py $(2) $(3) src/pinmaker.vhd.in $(1).PIN.tmp
 	mv $(1).PIN.tmp $(1).PIN
 $(1).xml: src/PIN_$(3).vhd src/IDROMConst.vhd src/xmlrom.vhd.in src/idrom_tools.vhd scripts/pin.py
+	@echo "\t\tCompiling XML"
 	@mkdir -p $(dir $(1))
 	scripts/pin.py $(2) $(3) src/xmlrom.vhd.in $(1).xml.tmp
 	mv $(1).xml.tmp $(1).xml
